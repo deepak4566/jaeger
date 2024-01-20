@@ -23,6 +23,8 @@ while [[ "$(curl -s -o /dev/null -w '%{http_code}' localhost:8080)" != "200" && 
   sleep 1
   i=$((i+1))
 done
+# Wait for the service to fully initialize before making the curl request using sleep
+sleep 5
 body=$(curl localhost:8080)
 if [[ $body != *"Rides On Demand"* ]]; then
   echo "String \"Rides On Demand\" is not present on the index page"
